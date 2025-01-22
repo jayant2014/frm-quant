@@ -1,32 +1,43 @@
 from math import exp
 
-def future_discrete_value(x, r, n):
-    return x*(1+r)**n
+class EquityMarket:
 
-def future_continuous_value(x, r, t):
-    return x*exp(r*t)
+    def __init__(self, investment, rate, period):
+        # Investment amount
+        self.investment = investment
+        # Rate of return
+        self.rate = rate / 100
+        # Duration of investment
+        self.period = period
 
-def present_discrete_value(x, r, n):
-    return x*(1+r)**-n
+    def future_discrete_value(self, x, r, n):
+        return x*(1+r)**n
 
-def present_continuous_value(x, r, t):
-    return x*exp(-r*t)
+    def future_continuous_value(self, x, r, t):
+        return x*exp(r*t)
 
-def time_value_of_money(investment, rate, period):
-    """
-        Args:
-            investment: Initial investment
-            rate: Rate of return
-            period: Duration of investment in years
-    """
-    print("Investment value: %s, Future value (discrete model): %s" % (investment, future_discrete_value(investment, rate, period)))
-    print("Investment value: %s, Future value (continuous model): %s" % (investment, future_continuous_value(investment, rate, period)))
-    print("Investment value: %s, Present value (discrete model): %s" % (investment, present_discrete_value(investment, rate, period)))
-    print("Investment value: %s, Present values (continuous model): %s" % (investment, present_continuous_value(investment, rate, period)))
+    def present_discrete_value(self, x, r, n):
+        return x*(1+r)**-n
+
+    def present_continuous_value(self, x, r, t):
+        return x*exp(-r*t)
+
+    def time_value_of_money(self):
+        """
+            Args:
+                investment: Initial investment
+                rate: Rate of return
+                period: Duration of investment in years
+        """
+        print("Investment value: %s, Future value (discrete model): %s" % (self.investment, self.future_discrete_value(self.investment, self.rate, self.period)))
+        print("Investment value: %s, Future value (continuous model): %s" % (self.investment, self.future_continuous_value(self.investment, self.rate, self.period)))
+        print("Investment value: %s, Present value (discrete model): %s" % (self.investment, self.present_discrete_value(self.investment, self.rate, self.period)))
+        print("Investment value: %s, Present values (continuous model): %s" % (self.investment, self.present_continuous_value(self.investment, self.rate, self.period)))
 
 if __name__ == '__main__':
     # Getting time value of money
-    time_value_of_money(100, 0.07, 10)
+    equity = EquityMarket(100, 7, 10)
+    equity.time_value_of_money()
 
 
 
